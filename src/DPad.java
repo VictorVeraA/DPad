@@ -25,6 +25,46 @@ public class DPad extends ImageView {
         setY(y);
         setOpacity(0.65);
 
+        setOnMousePressed(event -> {
+            xTouchPoint = event.getX();
+            yTouchPoint = event.getY();
+
+            setOpacity(1.0);
+            if(xTouchPoint >= x && xTouchPoint <= x + width/3) {
+                if(yTouchPoint >= y && yTouchPoint <= y + height/3) {
+                    //Izquierda arriba
+                    System.out.println("Izquierda arriba");
+                } else if(yTouchPoint >= y + height/3 && yTouchPoint <= y + 2*height/3) {
+                    //Izquierda
+                    System.out.println("Izquierda");
+                } else if(yTouchPoint >= y + 2*height/3 && yTouchPoint <= y + height) {
+                    //Izquierda abajo
+                    System.out.println("Izquierda abajo");
+                }
+            } else if(xTouchPoint >= x + 2*width/3 && xTouchPoint <= x + width) {
+                if(yTouchPoint >= y && yTouchPoint <= y + height/3) {
+                    //Derecha arriba
+                    System.out.println("Derecha arriba");
+                } else if(yTouchPoint >= y + height/3 && yTouchPoint <= y + 2*height/3) {
+                    //Derecha
+                    System.out.println("Derecha");
+                } else if(yTouchPoint >= y + 2*height/3 && yTouchPoint <= y + height) {
+                    //Derecha
+                    System.out.println("Derecha abajo");
+                }
+            } else if(xTouchPoint >= x + width/3 && xTouchPoint <= x + 2*width/3) {
+                if(yTouchPoint >= y && yTouchPoint <= y + height/3) {
+                    //Arriba
+                    System.out.println("Arriba");
+                } else if(yTouchPoint >= y + height/3 && yTouchPoint <= y + 2*height/3) {
+                    //Centro
+                } else if(yTouchPoint >= y + 2*height/3 && yTouchPoint <= y + height) {
+                    //Abajo
+                    System.out.println("Abajo");
+                }
+            }
+        });/*
+
         setOnMouseMoved(event -> {
             xTouchPoint = event.getX();
             yTouchPoint = event.getY();
@@ -63,10 +103,32 @@ public class DPad extends ImageView {
                     System.out.println("Abajo");
                 }
             }
-        });
+        });*/
 
         setOnMouseExited(event -> {
             setOpacity(0.65);
         });
     }
 }
+
+
+/*
+presionas boton
+
+metodo {
+dashing = true;
+dx = 2
+animation timer
+    if( i < 4)
+        move
+    else
+        stop
+        dashing = false;
+
+    i++
+}
+
+en el dpad no lo dejas mover si dashing = true
+
+
+ */
