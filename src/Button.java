@@ -17,7 +17,8 @@ public class Button extends ImageView {
         setY(y);
         setOpacity(0.65);
 
-
+        //Esto se usa para pruebas, si ocupas distintos botones con distintas funcionalidades entonces
+        //debes declarar por separado y utlizado la referencia al objeto para definir la funcionalidad.
         setOnMousePressed(event -> {
             setOpacity(1.0);
             System.out.println("Pressed " + name + "!");
