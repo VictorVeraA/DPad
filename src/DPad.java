@@ -63,7 +63,7 @@ public class DPad extends ImageView {
                     System.out.println("Abajo");
                 }
             }
-        });/*
+        });
 
         setOnMouseMoved(event -> {
             xTouchPoint = event.getX();
@@ -103,7 +103,7 @@ public class DPad extends ImageView {
                     System.out.println("Abajo");
                 }
             }
-        });*/
+        });
 
         setOnMouseExited(event -> {
             setOpacity(0.65);

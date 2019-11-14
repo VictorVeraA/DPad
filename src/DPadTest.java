@@ -11,22 +11,19 @@ public class DPadTest extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-
         Group grupo = new Group();
         Scene escena = new Scene(grupo, 1024, 600);
 
 
-        dpad = new DPad(50, 50, 150, 150);
-
-        Image img = new Image("file:resources/dpad.png");
-
-        DPad dpad2 = new DPad(100, 500, 500, 72);
-
-        DPad dpad3 = new DPad(220, 50, 400, 400);
+        dpad = new DPad(50, 400, 150, 150);
+        Button buttonA = new Button(570, 400, 100, 100, "resources/botonA.png");
+        buttonA.setName("A");
+        Button buttonB = new Button(450, 450, 100, 100, "resources/botonB.png");
+        buttonB.setName("B");
 
         grupo.getChildren().add(dpad);
-        grupo.getChildren().add(dpad2);
-        grupo.getChildren().add(dpad3);
+        grupo.getChildren().add(buttonA);
+        grupo.getChildren().add(buttonB);
 
         primaryStage.setScene(escena);
         primaryStage.setAlwaysOnTop(true);
