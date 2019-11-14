@@ -1,5 +1,8 @@
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -7,103 +10,65 @@ import javafx.scene.shape.Shape;
 import java.io.File;
 
 
-public class DPad extends ImageView {
+public class DPad extends Button {
 
     private final String path = "resources/";
     private Image img;
     private double xTouchPoint;
     private double yTouchPoint;
 
-    public DPad(double x, double y, double width, double height) {
-        img = new Image("file:" + path + "dpad.png", width, height, true, false);
+    public DPad(double x, double y, double width, double height, String imagePath) {
+        super(x,y,width,height,imagePath);
+    }
 
-        setImage(img);
+    //Se extiende la clase para poder poner el metodo con los eventos diferentes. De nuevo, estos son eventos de prueba,
+    //para usar un boton con el funcionamiento que deseas, se deben sobreescribir los eventos directamente desde los objetos.
 
-        setFitHeight(height);
-        setFitWidth(width);
-        setX(x);
-        setY(y);
-        setOpacity(0.65);
+    @Override
+    public void setTestEventHandlers() {
 
-        setOnMousePressed(event -> {
-            xTouchPoint = event.getX();
-            yTouchPoint = event.getY();
+        EventHandler me = event -> {
+            xTouchPoint = ((MouseEvent) event).getX();
+            yTouchPoint = ((MouseEvent) event).getY();
 
-            setOpacity(1.0);
-            if(xTouchPoint >= x && xTouchPoint <= x + width/3) {
-                if(yTouchPoint >= y && yTouchPoint <= y + height/3) {
+            DPad.this.setOpacity(1.0);
+            if (xTouchPoint >= getX() && xTouchPoint <= getX() + getFitWidth() / 3) {
+                if (yTouchPoint >= getY() && yTouchPoint <= getY() + getFitHeight() / 3) {
                     //Izquierda arriba
                     System.out.println("Izquierda arriba");
-                } else if(yTouchPoint >= y + height/3 && yTouchPoint <= y + 2*height/3) {
+                } else if (yTouchPoint >= getY() + getFitHeight() / 3 && yTouchPoint <= getY() + 2 * getFitHeight() / 3) {
                     //Izquierda
                     System.out.println("Izquierda");
-                } else if(yTouchPoint >= y + 2*height/3 && yTouchPoint <= y + height) {
+                } else if (yTouchPoint >= getY() + 2 * getFitHeight() / 3 && yTouchPoint <= getY() + getFitHeight()) {
                     //Izquierda abajo
                     System.out.println("Izquierda abajo");
                 }
-            } else if(xTouchPoint >= x + 2*width/3 && xTouchPoint <= x + width) {
-                if(yTouchPoint >= y && yTouchPoint <= y + height/3) {
+            } else if (xTouchPoint >= getX() + 2 * getFitWidth() / 3 && xTouchPoint <= getX() + getFitWidth()) {
+                if (yTouchPoint >= getY() && yTouchPoint <= getY() + getFitHeight() / 3) {
                     //Derecha arriba
                     System.out.println("Derecha arriba");
-                } else if(yTouchPoint >= y + height/3 && yTouchPoint <= y + 2*height/3) {
+                } else if (yTouchPoint >= getY() + getFitHeight() / 3 && yTouchPoint <= getY() + 2 * getFitHeight() / 3) {
                     //Derecha
                     System.out.println("Derecha");
-                } else if(yTouchPoint >= y + 2*height/3 && yTouchPoint <= y + height) {
+                } else if (yTouchPoint >= getY() + 2 * getFitHeight() / 3 && yTouchPoint <= getY() + getFitHeight()) {
                     //Derecha
                     System.out.println("Derecha abajo");
                 }
-            } else if(xTouchPoint >= x + width/3 && xTouchPoint <= x + 2*width/3) {
-                if(yTouchPoint >= y && yTouchPoint <= y + height/3) {
+            } else if (xTouchPoint >= getX() + getFitWidth() / 3 && xTouchPoint <= getX() + 2 * getFitWidth() / 3) {
+                if (yTouchPoint >= getY() && yTouchPoint <= getY() + getFitHeight() / 3) {
                     //Arriba
                     System.out.println("Arriba");
-                } else if(yTouchPoint >= y + height/3 && yTouchPoint <= y + 2*height/3) {
+                } else if (yTouchPoint >= getY() + getFitHeight() / 3 && yTouchPoint <= getY() + 2 * getFitHeight() / 3) {
                     //Centro
-                } else if(yTouchPoint >= y + 2*height/3 && yTouchPoint <= y + height) {
+                } else if (yTouchPoint >= getY() + 2 * getFitHeight() / 3 && yTouchPoint <= getY() + getFitHeight()) {
                     //Abajo
                     System.out.println("Abajo");
                 }
             }
-        });
+        };
 
-        setOnMouseMoved(event -> {
-            xTouchPoint = event.getX();
-            yTouchPoint = event.getY();
-
-            setOpacity(1.0);
-            if(xTouchPoint >= x && xTouchPoint <= x + width/3) {
-                if(yTouchPoint >= y && yTouchPoint <= y + height/3) {
-                    //Izquierda arriba
-                    System.out.println("Izquierda arriba");
-                } else if(yTouchPoint >= y + height/3 && yTouchPoint <= y + 2*height/3) {
-                    //Izquierda
-                    System.out.println("Izquierda");
-                } else if(yTouchPoint >= y + 2*height/3 && yTouchPoint <= y + height) {
-                    //Izquierda abajo
-                    System.out.println("Izquierda abajo");
-                }
-            } else if(xTouchPoint >= x + 2*width/3 && xTouchPoint <= x + width) {
-                if(yTouchPoint >= y && yTouchPoint <= y + height/3) {
-                    //Derecha arriba
-                    System.out.println("Derecha arriba");
-                } else if(yTouchPoint >= y + height/3 && yTouchPoint <= y + 2*height/3) {
-                    //Derecha
-                    System.out.println("Derecha");
-                } else if(yTouchPoint >= y + 2*height/3 && yTouchPoint <= y + height) {
-                    //Derecha
-                    System.out.println("Derecha abajo");
-                }
-            } else if(xTouchPoint >= x + width/3 && xTouchPoint <= x + 2*width/3) {
-                if(yTouchPoint >= y && yTouchPoint <= y + height/3) {
-                    //Arriba
-                    System.out.println("Arriba");
-                } else if(yTouchPoint >= y + height/3 && yTouchPoint <= y + 2*height/3) {
-                    //Centro
-                } else if(yTouchPoint >= y + 2*height/3 && yTouchPoint <= y + height) {
-                    //Abajo
-                    System.out.println("Abajo");
-                }
-            }
-        });
+        setOnMousePressed(me);
+        setOnMouseMoved(me);
 
         setOnMouseExited(event -> {
             setOpacity(0.65);

@@ -15,11 +15,16 @@ public class DPadTest extends Application {
         Scene escena = new Scene(grupo, 1024, 600);
 
 
-        dpad = new DPad(50, 400, 150, 150);
+        dpad = new DPad(50, 400, 150, 150, "resources/dpad.png");
+        dpad.setTestEventHandlers();
+
         Button buttonA = new Button(570, 400, 100, 100, "resources/botonA.png");
         buttonA.setName("A");
+        buttonA.setTestEventHandlers();
+
         Button buttonB = new Button(450, 450, 100, 100, "resources/botonB.png");
         buttonB.setName("B");
+        buttonB.setTestEventHandlers();
 
         grupo.getChildren().add(dpad);
         grupo.getChildren().add(buttonA);
@@ -30,9 +35,8 @@ public class DPadTest extends Application {
         primaryStage.centerOnScreen();
         primaryStage.requestFocus();
         primaryStage.setTitle("PPP - Pepenadores Post 'Pocalipticos");
+
         primaryStage.show();
-
-
 
     }
 
